@@ -1,0 +1,33 @@
+{
+  "name": "weatherstation",
+  "version": "1.0.0",
+  "description": "python software for a esp8266 based weatherstation that pushes its data to weather undergound",
+  "main": "main",
+  "directories": {
+    "test": "test"
+  },
+  "author": "Chris Bentley <chris.bentley@wireup.io> (http://wireup.io/)",
+  "scripts": {
+    "dev": "python ./src/weathersation/main.py",
+    "do": "node ./node_modules/plop/src/plop.js",
+    "setproxy": "npm config set proxy http://194.145.60.1:9400 && npm config set https-proxy http://194.145.60.1:9400",
+    "deleteproxy": "npm config delete proxy && npm config delete https-proxy "
+  },
+  "keywords": [
+    "esp8266",
+    "weather",
+    "weatherstation",
+    "wunderground",
+    "wind",
+    "direction",
+    "temperature",
+    "humidity"
+  ],
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "inquirer-recursive": "0.0.5",
+    "plop": "^2.1.0",
+    "serialport": "^7.0.2",
+    "shelljs": "^0.8.2"
+  }
+}

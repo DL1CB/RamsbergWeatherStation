@@ -1,0 +1,11 @@
+node_modules/
+npm-debug.log*
+package-lock.json
+*__pycache__
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
