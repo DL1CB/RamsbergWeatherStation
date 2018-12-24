@@ -31,12 +31,17 @@ annemometerPin.irq(trigger=Pin.IRQ_FALLING, handler=interruptHandler)
 def readrawdata():
     """ reads the raw data from the sensors """
     global _annemometerCount
+    global _winddirraw
+    global _windspeedraw
+    global _tempraw
+    global _humidraw
+    global _pressureraw
+    global _soiltempraw
+
     _winddirraw = winddirecitonPin.read()
     #_tempraw, _pressureraw, _humidraw = bme280.read_compensated_data()
     _windspeedraw = _annemometerCount
     _annemometerCount = 0 # resent the annemometerCount
-
-
 
 
 def winddirraw():
