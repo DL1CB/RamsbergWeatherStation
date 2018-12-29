@@ -2,20 +2,20 @@ from machine import Pin, ADC, I2C
 from bme280 import BME280
 
 """ initilize the i2c bus and the bme280 temperature, humidity and pressure sensor """
-#i2c = I2C(scl=Pin(2), sda=Pin(0))
-#bme280 = BME280(i2c=i2c)
-annemometerPin = Pin(4, Pin.IN)
+i2c = I2C(scl=Pin(5), sda=Pin(4))
+bme280 = BME280(i2c=i2c)
+annemometerPin = Pin(14, Pin.IN)
 winddirecitonPin = ADC(0)     
 #sucessLED = Pin(6, Pin.OUT)
 #sucessLED.value(1)
 
 _annemometerCount = 0
-_winddirraw = 250
-_windspeedraw = 40
-_tempraw = 27.5
-_humidraw = 91
-_pressureraw = 102096
-_soiltempraw = 10
+_winddirraw = 0
+_windspeedraw = 0
+_tempraw = 0
+_humidraw = 100
+_pressureraw = 102000
+_soiltempraw = 0
 _soilmoistureraw = 100
 
 
@@ -39,7 +39,7 @@ def readrawdata():
     global _soiltempraw
 
     _winddirraw = winddirecitonPin.read()
-    #_tempraw, _pressureraw, _humidraw = bme280.read_compensated_data()
+    _tempraw, _pressureraw, _humidraw = bme280.read_compensated_data()
     _windspeedraw = _annemometerCount
     _annemometerCount = 0 # resent the annemometerCount
 

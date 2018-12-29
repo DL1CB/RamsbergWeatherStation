@@ -36,7 +36,7 @@ def windgustdir_10m():
 
 def humidity():
     """ [% outdoor humidity 0-100%] """
-    return humidraw() * 100 // 100
+    return humidraw() // 1024
 
 def dewptf():
     """ [F outdoor dewpoint F] """
@@ -44,7 +44,7 @@ def dewptf():
 
 def tempf():
      """ [F outdoor temperature] """ 
-     return c_to_f(tempraw())
+     return c_to_f(tempraw() / 100)
 
 def rainin():
      """ [rain inches over the past hour)] """ 
@@ -56,7 +56,7 @@ def dailyrainin():
 
 def baromin(): 
     """[barometric pressure inches]"""
-    return pa_to_inhg(pressureraw())
+    return pa_to_inhg(pressureraw() / 256)
 
 def soiltempf():
     """ [F soil temperature] """
