@@ -25,28 +25,25 @@ async def readrawdataTask():
 async def updateWundergroundTask():
     """ send the processed weather data to the wunderground cloud"""
     while 1:
-        ## do some updating
+        joinwifi()
         await asyncio.sleep(10)
         updatewunderground()
         printvalues()
 
 def run():
     """ get thw wifi going then push data to the wunderground cloud """
-    loop = asyncio.get_event_loop()
-
-    try:# to join a wfinetwork (micropython)
-        joinwifi()
-        loop.create_task( readrawdataTask() )  
-        loop.create_task( updateWundergroundTask() )
-    except Exception:
-        loop.create_task( updateWundergroundTask() )
-        loop.create_task( readrawdataTask() )  
 
     print('starting Ramsberg weatherstation to wunderground upload')
-    readrawdataTask()
-    printvalues()
-    updateWundergroundTask()
+
+    loop = asyncio.get_event_loop()
+
+    loop.create_task( updateWundergroundTask() )
+    loop.create_task( readrawdataTask() )  
+
     loop.run_forever()
 
 if __name__ == "__main__":
     run()
+
+
+    

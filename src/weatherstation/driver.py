@@ -1,13 +1,21 @@
 from machine import Pin, ADC, I2C 
 from bme280 import BME280
 
+"""
+The Driver is Written for a Nodemcu 
+Pins
+5   SCL BME280
+4   SDA BME280
+14  Wind Aneemometer Switch
+0   Wind Direction Potentiometer
+"""
+
 """ initilize the i2c bus and the bme280 temperature, humidity and pressure sensor """
 i2c = I2C(scl=Pin(5), sda=Pin(4))
 bme280 = BME280(i2c=i2c)
-annemometerPin = Pin(14, Pin.IN)
+
+annemometerPin = Pin(12, Pin.IN, Pin.PULL_UP)
 winddirecitonPin = ADC(0)     
-#sucessLED = Pin(6, Pin.OUT)
-#sucessLED.value(1)
 
 _annemometerCount = 0
 _winddirraw = 0
@@ -17,7 +25,6 @@ _humidraw = 100
 _pressureraw = 102000
 _soiltempraw = 0
 _soilmoistureraw = 100
-
 
 # define interupt handler
 def interruptHandler(pin):
@@ -42,7 +49,6 @@ def readrawdata():
     _tempraw, _pressureraw, _humidraw = bme280.read_compensated_data()
     _windspeedraw = _annemometerCount
     _annemometerCount = 0 # resent the annemometerCount
-
 
 def winddirraw():
     """ reads a raw analog value [0-1024] representing the winddirection """

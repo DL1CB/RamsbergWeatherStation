@@ -3,7 +3,7 @@ try:
 except ImportError:
     import urllib.request as request
 
-from config import sationid, stationkey
+from config import stationid, stationkey
 
 from weathervalues import winddir, windspeedmph, humidity, dewptf, tempf, baromin, soiltempf, soilmoisture
 
@@ -37,7 +37,7 @@ def updatewunderground():
     '&soiltempf={}',
     '&soilmoisture={}',
     '&action=updateraw']).format(
-        sationid,
+        stationid,
         stationkey,
         winddir(),
         windspeedmph(),
@@ -49,7 +49,12 @@ def updatewunderground():
         soilmoisture()
     )
 
-    r = request.urlopen(url)
+    try:
+        r = request.urlopen(url)
+    except Exception as e:
+        print('could not send data to wunderground')
+        print(e)
+    
 
 
 if __name__ == "__main__":
